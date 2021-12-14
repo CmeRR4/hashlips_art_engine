@@ -24,22 +24,58 @@ const solanaMetadata = {
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
   {
+    growEditionSizeTo: 2,
+    layersOrder: [
+      { name: "Background" },
+      { name: "Base_body" },
+      { name: "Clothes" },
+      { name: "Hair" },
+      { name: "body_accessories" },
+    ],
+  },
+  {
+    // Creates an additional 5 artworks
     growEditionSizeTo: 5,
     layersOrder: [
       { name: "Background" },
-      { name: "Eyeball" },
-      { name: "Eye color" },
-      { name: "Iris" },
-      { name: "Shine" },
-      { name: "Bottom lid" },
-      { name: "Top lid" },
+      { name: "Base_body" },
+      { name: "Clothes" },
+      { name: "Hair" },
+      { name: "body_accessories" },
+      { name: "ears_accessories" },
+    ],
+  },
+  {
+    // Creates an additional 5 artworks
+    growEditionSizeTo: 6,
+    layersOrder: [
+      { name: "Background" },
+      { name: "Base_body" },
+      { name: "Clothes" },
+      { name: "Hair" },
+      { name: "body_accessories" },
+      { name: "ears_accessories" },
+      { name: "hair_accessories" },
+    ],
+  },
+  {
+    // Creates an additional 5 artworks
+    growEditionSizeTo: 8,
+    layersOrder: [
+      { name: "Background" },
+      { name: "Base_body" },
+      { name: "Clothes" },
+      { name: "Hair" },
+      { name: "body_accessories" },
+      { name: "ears_accessories" },
+      { name: "hairpin_accessories" },
     ],
   },
 ];
 
 const shuffleLayerConfigurations = false;
 
-const debugLogs = false;
+const debugLogs = true;
 
 const format = {
   width: 512,
@@ -48,9 +84,9 @@ const format = {
 };
 
 const gif = {
-  export: false,
-  repeat: 0,
-  quality: 100,
+  export: true,
+  repeat: -1,
+  quality: 200,
   delay: 500,
 };
 
@@ -92,7 +128,7 @@ const preview = {
 };
 
 const preview_gif = {
-  numberOfImages: 5,
+  numberOfImages: 20,
   order: "ASC", // ASC, DESC, MIXED
   repeat: 0,
   quality: 100,
@@ -120,3 +156,16 @@ module.exports = {
   gif,
   preview_gif,
 };
+
+
+I wanted to generate an animated GIF collection with hashlips,
+with all animated layers, background, body and character face.
+I ended up editing the hashlips code in a way that hashlips does the
+file selection and rarity checking, then it runs a command using the
+imagemagick library. This is the command:
+
+convert -dispose previous layer1.gif \
+null: \ \( layer2.gif -coalesce \) \
+-compose over -layers composite \ null: \
+\( layer3.gif -coalesce \) \ -compose over -layers composite \
+-layers optimize \ result.gif

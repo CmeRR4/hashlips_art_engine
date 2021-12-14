@@ -22,6 +22,7 @@ const {
   solanaMetadata,
   gif,
 } = require(`${basePath}/src/config.js`);
+
 const canvas = createCanvas(format.width, format.height);
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = format.smoothing;
@@ -176,9 +177,12 @@ const addAttributes = (_element) => {
   });
 };
 
+
+
 const loadLayerImg = async (_layer) => {
   return new Promise(async (resolve) => {
-    const image = await loadImage(`${_layer.selectedElement.path}`);
+
+   const image = await loadImage(`${_layer.selectedElement.path}`);
     resolve({ layer: _layer, loadedImage: image });
   });
 };
