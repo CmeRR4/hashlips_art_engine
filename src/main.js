@@ -336,6 +336,7 @@ const startCreating = async () => {
   let editionCount = 1;
   let failedCount = 0;
   let abstractedIndexes = [];
+
   for (
     let i = network == NETWORK.sol ? 0 : 1;
     i <= layerConfigurations[layerConfigurations.length - 1].growEditionSizeTo;
@@ -343,19 +344,25 @@ const startCreating = async () => {
   ) {
     abstractedIndexes.push(i);
   }
+
   if (shuffleLayerConfigurations) {
     abstractedIndexes = shuffle(abstractedIndexes);
   }
+
   debugLogs
     ? console.log("Editions left to create: ", abstractedIndexes)
     : null;
+
   while (layerConfigIndex < layerConfigurations.length) {
+
     const layers = layersSetup(
       layerConfigurations[layerConfigIndex].layersOrder
     );
+
     while (
       editionCount <= layerConfigurations[layerConfigIndex].growEditionSizeTo
     ) {
+
       let newDna = createDna(layers);
       if (isDnaUnique(dnaList, newDna)) {
         let results = constructLayerToDna(newDna, layers);
@@ -368,6 +375,7 @@ const startCreating = async () => {
         await Promise.all(loadedElements).then((renderObjectArray) => {
           debugLogs ? console.log("Clearing canvas") : null;
           ctx.clearRect(0, 0, format.width, format.height);
+
           if (gif.export) {
             hashlipsGiffer = new HashlipsGiffer(
               canvas,
@@ -379,9 +387,11 @@ const startCreating = async () => {
             );
             hashlipsGiffer.start();
           }
+
           if (background.generate) {
             drawBackground();
           }
+
           renderObjectArray.forEach((renderObject, index) => {
             drawElement(
               renderObject,
@@ -392,24 +402,35 @@ const startCreating = async () => {
               hashlipsGiffer.add();
             }
           });
+
           if (gif.export) {
             hashlipsGiffer.stop();
           }
+
+          // convert -dispose previous layer1.gif \
+          //   null: \ \( layer2.gif -coalesce \) \
+          //     -compose over -layers composite \ null: \
+          //       \( layer3.gif -coalesce \) \ -compose over -layers composite \
+          //         -layers optimize \ result.gif
+
           debugLogs
             ? console.log("Editions left to create: ", abstractedIndexes)
             : null;
           saveImage(abstractedIndexes[0]);
           addMetadata(newDna, abstractedIndexes[0]);
           saveMetaDataSingleFile(abstractedIndexes[0]);
+
           console.log(
             `Created edition: ${abstractedIndexes[0]}, with DNA: ${sha1(
               newDna
             )}`
           );
         });
+
         dnaList.add(filterDNAOptions(newDna));
         editionCount++;
         abstractedIndexes.shift();
+
       } else {
         console.log("DNA exists!");
         failedCount++;

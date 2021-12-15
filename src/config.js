@@ -26,7 +26,7 @@ const layerConfigurations = [
   {
     growEditionSizeTo: 2,
     layersOrder: [
-      { name: "Background" },
+      // { name: "Background" },
       { name: "Base_body" },
       { name: "Clothes" },
       { name: "Hair" },
@@ -35,9 +35,9 @@ const layerConfigurations = [
   },
   {
     // Creates an additional 5 artworks
-    growEditionSizeTo: 5,
+    growEditionSizeTo: 3,
     layersOrder: [
-      { name: "Background" },
+      // { name: "Background" },
       { name: "Base_body" },
       { name: "Clothes" },
       { name: "Hair" },
@@ -47,9 +47,9 @@ const layerConfigurations = [
   },
   {
     // Creates an additional 5 artworks
-    growEditionSizeTo: 6,
+    growEditionSizeTo: 4,
     layersOrder: [
-      { name: "Background" },
+      // { name: "Background" },
       { name: "Base_body" },
       { name: "Clothes" },
       { name: "Hair" },
@@ -60,15 +60,16 @@ const layerConfigurations = [
   },
   {
     // Creates an additional 5 artworks
-    growEditionSizeTo: 8,
+    growEditionSizeTo: 10,
     layersOrder: [
-      { name: "Background" },
+      // { name: "Background" },
       { name: "Base_body" },
       { name: "Clothes" },
       { name: "Hair" },
       { name: "body_accessories" },
       { name: "ears_accessories" },
       { name: "hairpin_accessories" },
+      { name: "face_accessories" },
     ],
   },
 ];
@@ -78,9 +79,9 @@ const shuffleLayerConfigurations = false;
 const debugLogs = true;
 
 const format = {
-  width: 512,
-  height: 512,
-  smoothing: false,
+  width: 4000,
+  height: 4000,
+  smoothing: true,
 };
 
 const gif = {
@@ -121,17 +122,17 @@ const rarityDelimiter = "#";
 const uniqueDnaTorrance = 10000;
 
 const preview = {
-  thumbPerRow: 5,
-  thumbWidth: 50,
-  imageRatio: format.height / format.width,
+  thumbPerRow: 2,
+  thumbWidth: 5,
+  imageRatio: format.height / 100,
   imageName: "preview.png",
 };
 
 const preview_gif = {
-  numberOfImages: 20,
+  numberOfImages: 10,
   order: "ASC", // ASC, DESC, MIXED
   repeat: 0,
-  quality: 100,
+  quality: 1000,
   delay: 500,
   imageName: "preview.gif",
 };
@@ -158,14 +159,9 @@ module.exports = {
 };
 
 
-I wanted to generate an animated GIF collection with hashlips,
-with all animated layers, background, body and character face.
-I ended up editing the hashlips code in a way that hashlips does the
-file selection and rarity checking, then it runs a command using the
-imagemagick library. This is the command:
+// I wanted to generate an animated GIF collection with hashlips,
+// with all animated layers, background, body and character face.
+// I ended up editing the hashlips code in a way that hashlips does the
+// file selection and rarity checking, then it runs a command using the
+// imagemagick library. This is the command:
 
-convert -dispose previous layer1.gif \
-null: \ \( layer2.gif -coalesce \) \
--compose over -layers composite \ null: \
-\( layer3.gif -coalesce \) \ -compose over -layers composite \
--layers optimize \ result.gif
