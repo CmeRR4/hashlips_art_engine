@@ -13,14 +13,14 @@ const saveProjectPreviewImage = async (_data) => {
   // Extract from preview config
   const { thumbWidth, thumbPerRow, imageRatio, imageName } = preview;
   // Calculate height on the fly
-  const thumbHeight = 1500;
+  const thumbHeight = 180;
 
-  const mythumbWidth = 800;
+  const mythumbWidth = 180;
 
   // Prepare canvas
-  const previewCanvasWidth = 4000;
+  const previewCanvasWidth = 1440;
     // thumbWidth * thumbPerRow;
-  const previewCanvasHeight = 3000;
+  const previewCanvasHeight = 900;
     // thumbHeight * Math.ceil(_data.length / thumbPerRow);
   // Shout from the mountain tops
   console.log(
@@ -39,10 +39,10 @@ const saveProjectPreviewImage = async (_data) => {
     await loadImage(`${buildDir}/images/${nft.edition}.png`).then((image) => {
       previewCtx.drawImage(
         image,
-        mythumbWidth * (index % 5),
-        thumbHeight * Math.trunc(index / 5),
+        mythumbWidth * (index % 10),
+        thumbHeight * Math.trunc(index / 10),
         mythumbWidth,
-        thumbHeight
+        thumbHeight,
       );
     });
   }

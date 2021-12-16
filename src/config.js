@@ -35,27 +35,14 @@ const layerConfigurations = [
   },
   {
     // Creates an additional 5 artworks
-    growEditionSizeTo: 3,
+    growEditionSizeTo: 5,
     layersOrder: [
       // { name: "Background" },
       { name: "Base_body" },
       { name: "Clothes" },
+      { name: "ears_accessories" },
       { name: "Hair" },
       { name: "body_accessories" },
-      { name: "ears_accessories" },
-    ],
-  },
-  {
-    // Creates an additional 5 artworks
-    growEditionSizeTo: 4,
-    layersOrder: [
-      // { name: "Background" },
-      { name: "Base_body" },
-      { name: "Clothes" },
-      { name: "Hair" },
-      { name: "body_accessories" },
-      { name: "ears_accessories" },
-      { name: "hair_accessories" },
     ],
   },
   {
@@ -65,11 +52,24 @@ const layerConfigurations = [
       // { name: "Background" },
       { name: "Base_body" },
       { name: "Clothes" },
+      { name: "ears_accessories" },
       { name: "Hair" },
       { name: "body_accessories" },
+      { name: "hair_accessories" },
+    ],
+  },
+  {
+    // Creates an additional 5 artworks
+    growEditionSizeTo: 50,
+    layersOrder: [
+      // { name: "Background" },
+      { name: "Base_body" },
+      { name: "Clothes" },
       { name: "ears_accessories" },
-      { name: "hairpin_accessories" },
       { name: "face_accessories" },
+      { name: "Hair" },
+      { name: "body_accessories" },
+      { name: "hairpin_accessories" },
     ],
   },
 ];
@@ -79,8 +79,8 @@ const shuffleLayerConfigurations = false;
 const debugLogs = true;
 
 const format = {
-  width: 4000,
-  height: 4000,
+  width: 1080,
+  height: 1080,
   smoothing: true,
 };
 
@@ -123,16 +123,16 @@ const uniqueDnaTorrance = 10000;
 
 const preview = {
   thumbPerRow: 2,
-  thumbWidth: 5,
+  thumbWidth: 50,
   imageRatio: format.height / 100,
   imageName: "preview.png",
 };
 
 const preview_gif = {
-  numberOfImages: 10,
+  numberOfImages: 50,
   order: "ASC", // ASC, DESC, MIXED
   repeat: 0,
-  quality: 1000,
+  quality: 1080,
   delay: 500,
   imageName: "preview.gif",
 };
